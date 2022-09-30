@@ -1,8 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "OGIqfdrf2v0wEJY81rJ2Bi4mJGzfVbLxX5sZG5wgCp9k954xEDp4DxckLw2SSKAyc3V33L/1WbDxrhZJBf/xXg==",
+  "dgSpecHash": "EA1/f3l3YKUdNhlCgWm3/I64wI7Jf8HqZczxYLUrKS/4hEs6yHqzH36GcUHbjJEpDSZtTkrReVhM1nQOaKFf6w==",
   "success": true,
   "projectFilePath": "C:\\Repos\\Studies\\InternalTalent\\Desafio\\src\\CRUD.Api\\CRUD.Api.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\marcos.diego.mendes\\.nuget\\packages\\mediatr\\11.0.0\\mediatr.11.0.0.nupkg.sha512",
+    "C:\\Users\\marcos.diego.mendes\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
+    "C:\\Users\\marcos.diego.mendes\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\marcos.diego.mendes\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\marcos.diego.mendes\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "C:\\Users\\marcos.diego.mendes\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "C:\\Users\\marcos.diego.mendes\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "C:\\Users\\marcos.diego.mendes\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
   "logs": []
 }
