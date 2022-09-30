@@ -18,6 +18,13 @@ namespace CRUD.Infrastructure.Repositories.Context
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<PedidoItem> PedidoItens { get; set; }
+
+        public AppContext(DbContextOptions<AppContext> options)
+            : base (options)
+            {
+
+            }
 
         protected override void OnConfiguring (DbContextOptionsBuilder optionsBuilder)
         {
