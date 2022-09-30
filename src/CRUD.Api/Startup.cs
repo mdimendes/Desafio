@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-
+using CRUD.CrossCutting.DependencyInjection;
 namespace CRUD.Api
 {
     public class Startup
@@ -41,6 +41,7 @@ namespace CRUD.Api
                     Version = "v1"
                 });
             });
+            services.AddMSSQL(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
