@@ -34,9 +34,7 @@ namespace CRUD.Api
             services.AddHttpClient();
             //services.AddErrorHandling(Configuration);
             services.AddSwaggerGen(options =>
-            {
-                var xmlFilename =$"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+            {               
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "CRUD API",
@@ -51,6 +49,13 @@ namespace CRUD.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                    options.RoutePrefix = string.Empty;
+                });
             }
 
             app.Use(async (context, next) =>
@@ -74,13 +79,7 @@ namespace CRUD.Api
                 endpoints.MapControllers();
             });
 
-            app.UseSwagger();
 
-            app.UseSwaggerUI(options =>
-            {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-                options.RoutePrefix = string.Empty;
-            });
         }
     }
 }
