@@ -1,8 +1,10 @@
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using CRUD.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 
@@ -19,15 +21,19 @@ namespace CRUD.Infrastructure.Repositories.Context
 
         protected override void OnConfiguring (DbContextOptionsBuilder optionsBuilder)
         {
+             IConfiguration configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("Appsettings.json", false, true)
+            .Build();
+
             optionsBuilder
                 .UseLoggerFactory(_logger)
                 .EnableSensitiveDataLogging() //Exibe valores dos parametros no console de logs
-                .UseSqlServer("Data source=WINAP0WHKTBVUQ6\\SQLEXPRESS;Initial Catalog=DesafioInternalTalent;Integrated Security=true",
+                .UseSqlServer(configuration.GetConnectionString("ServerConnection"),
                 p => p.EnableRetryOnFailure(
                     maxRetryCount: 2, 
                     maxRetryDelay: TimeSpan.FromSeconds(5), 
-                    errorNumbersToAdd:null).MigrationsHistoryTable("HistoryTable"));
-
+                    errorNumbersToAdd:null).MigrationsHistoryTable("HistoryTable"));            
         }
 
          protected override void OnModelCreating(ModelBuilder modelBuilder)
