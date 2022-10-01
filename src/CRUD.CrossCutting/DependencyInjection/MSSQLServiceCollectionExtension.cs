@@ -11,7 +11,7 @@ namespace CRUD.CrossCutting.DependencyInjection
     {
         public static IServiceCollection AddMSSQL(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<Infrastructure.Repositories.Context.AppContext>(option => option.UseSqlServer(configuration.GetConnectionString("ServerConnection")));
+            services.AddDbContext<Infrastructure.Repositories.Context.AppDbContext>(option => option.UseSqlServer(configuration.GetConnectionString("ServerConnection")));
             
             return services;
         }

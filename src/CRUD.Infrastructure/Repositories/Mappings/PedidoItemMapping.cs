@@ -11,8 +11,8 @@ namespace CRUD.Infrastructure.Repositories.Mappings
             builder.ToTable("PedidoItens");
             builder.HasKey(p => p.Id);
             builder.Property(p => p.Quantidade).HasDefaultValue(1).IsRequired(); //Outra Forma de inserir valor default
-            builder.Property(p => p.Valor).IsRequired();
-            builder.Property(p => p.Desconto).IsRequired();
+            builder.Property(p => p.Valor).HasColumnType("DECIMAL(6,2)").IsRequired();
+            builder.Property(p => p.Desconto).HasColumnType("DECIMAL(6,2)").IsRequired();
         }
     }
 }

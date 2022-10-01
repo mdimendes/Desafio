@@ -10,11 +10,11 @@ namespace CRUD.Api.Controllers
     [ApiController]
     public class PedidoController : ControllerBase
     {
-        private readonly AppContext _appContext;
+        private readonly AppDbContext _AppDbContext;
 
-        public PedidoController(AppContext appContext)
+        public PedidoController(AppDbContext AppDbContext)
         {
-            _appContext = appContext;
+            _AppDbContext = AppDbContext;
         }
 
         [HttpGet]
@@ -24,7 +24,7 @@ namespace CRUD.Api.Controllers
             return Ok(new
             {
                 success = true,
-                data = _appContext.Pedidos.ToListAsync()
+                data = _AppDbContext.Pedidos.ToListAsync()
             });
         }
 
@@ -32,8 +32,8 @@ namespace CRUD.Api.Controllers
         [Route("[action]")]
         public async Task<IActionResult> InserePedido(Pedido pedido)
         {
-            _appContext.Pedidos.Add(pedido);
-            await _appContext.SaveChangesAsync();
+            _AppDbContext.Pedidos.Add(pedido);
+            await _AppDbContext.SaveChangesAsync();
 
             return Ok(new
             {
@@ -46,8 +46,8 @@ namespace CRUD.Api.Controllers
         [Route("[action]")]
         public async Task<IActionResult> AtualizaPedido(Pedido pedidoNew)
         {
-             var pedidoOld = _appContext.Clientes.Find(pedidoNew.Id);
-            _appContext.Pedidos.Update(pedidoNew);
+             var pedidoOld = _AppDbContext.Clientes.Find(pedidoNew.Id);
+            _AppDbContext.Pedidos.Update(pedidoNew);
 
             return Ok(new
             {
@@ -60,13 +60,13 @@ namespace CRUD.Api.Controllers
         [Route("[action]")]
         public async Task<IActionResult> RemovePedido(Pedido pedido)
         {
-            _appContext.Entry(_appContext.Pedidos.Find(pedido)).State = EntityState.Deleted;
-            await _appContext.SaveChangesAsync();
+            _AppDbContext.Entry(_AppDbContext.Pedidos.Find(pedido)).State = EntityState.Deleted;
+            await _AppDbContext.SaveChangesAsync();
 
             return Ok(new
             {
                 success = true,
-                data = _appContext.Pedidos.ToListAsync()
+                data = _AppDbContext.Pedidos.ToListAsync()
             });
         }
 
