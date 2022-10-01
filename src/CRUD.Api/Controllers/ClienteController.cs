@@ -10,11 +10,11 @@ namespace CRUD.Api.Controllers
     [ApiController]
     public class ClienteController : ControllerBase
     {
-        private readonly AppContext _appContext;
+        private readonly AppDbContext _AppDbContext;
 
-        public ClienteController(AppContext appContext)
+        public ClienteController(AppDbContext AppDbContext)
         {
-            _appContext = appContext;
+            _AppDbContext = AppDbContext;
         }
 
         [HttpGet]
@@ -24,7 +24,7 @@ namespace CRUD.Api.Controllers
             return Ok(new
             {
                 success = true,
-                data = _appContext.Clientes.ToListAsync()
+                data = _AppDbContext.Clientes.ToListAsync()
             });
         }
 
@@ -32,8 +32,8 @@ namespace CRUD.Api.Controllers
         [Route("[action]")]
         public async Task<IActionResult> InsereCliente(Cliente cliente)
         {
-            _appContext.Clientes.Add(cliente);
-            await _appContext.SaveChangesAsync();
+            _AppDbContext.Clientes.Add(cliente);
+            await _AppDbContext.SaveChangesAsync();
 
             return Ok(new
             {
@@ -46,8 +46,8 @@ namespace CRUD.Api.Controllers
         [Route("[action]")]
         public async Task<IActionResult> AtualizaCliente(Cliente clienteNew)
         {
-             var clienteOld = _appContext.Clientes.Find(clienteNew.Id);
-            _appContext.Clientes.Update(clienteNew);
+             var clienteOld = _AppDbContext.Clientes.Find(clienteNew.Id);
+            _AppDbContext.Clientes.Update(clienteNew);
 
             return Ok(new
             {
@@ -60,13 +60,13 @@ namespace CRUD.Api.Controllers
         [Route("[action]")]
         public async Task<IActionResult> RemoveCliente(Cliente cliente)
         {
-            _appContext.Entry(_appContext.Clientes.Find(cliente)).State = EntityState.Deleted;
-            await _appContext.SaveChangesAsync();
+            _AppDbContext.Entry(_AppDbContext.Clientes.Find(cliente)).State = EntityState.Deleted;
+            await _AppDbContext.SaveChangesAsync();
 
             return Ok(new
             {
                 success = true,
-                data = _appContext.Clientes.ToListAsync()
+                data = _AppDbContext.Clientes.ToListAsync()
             });
         }
 

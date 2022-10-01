@@ -10,11 +10,11 @@ namespace CRUD.Api.Controllers
     [ApiController]
     public class ProdutoController: ControllerBase
     {
-        private readonly AppContext _appContext;
+        private readonly AppDbContext _AppDbContext;
 
-        public ProdutoController(AppContext appContext)
+        public ProdutoController(AppDbContext AppDbContext)
         {
-            _appContext = appContext;
+            _AppDbContext = AppDbContext;
         }
 
         [HttpGet]
@@ -24,7 +24,7 @@ namespace CRUD.Api.Controllers
             return Ok(new
             {
                 success = true,
-                data = _appContext.Produtos.ToListAsync()
+                data = _AppDbContext.Produtos.ToListAsync()
             });
         }
 
@@ -32,8 +32,8 @@ namespace CRUD.Api.Controllers
         [Route("[action]")]
         public async Task<IActionResult> InsereProduto(Produto produto)
         {
-            _appContext.Produtos.Add(produto);
-            await _appContext.SaveChangesAsync();
+            _AppDbContext.Produtos.Add(produto);
+            await _AppDbContext.SaveChangesAsync();
 
             return Ok(new
             {
@@ -46,8 +46,8 @@ namespace CRUD.Api.Controllers
         [Route("[action]")]
         public async Task<IActionResult> AtualizaProduto(Produto produtoNew)
         {
-             var produtoOld = _appContext.Produtos.Find(produtoNew.Id);
-            _appContext.Produtos.Update(produtoNew);
+             var produtoOld = _AppDbContext.Produtos.Find(produtoNew.Id);
+            _AppDbContext.Produtos.Update(produtoNew);
 
             return Ok(new
             {
@@ -60,13 +60,13 @@ namespace CRUD.Api.Controllers
         [Route("[action]")]
         public async Task<IActionResult> RemoveProduto(Produto produto)
         {
-            _appContext.Entry(_appContext.Produtos.Find(produto)).State = EntityState.Deleted;
-            await _appContext.SaveChangesAsync();
+            _AppDbContext.Entry(_AppDbContext.Produtos.Find(produto)).State = EntityState.Deleted;
+            await _AppDbContext.SaveChangesAsync();
 
             return Ok(new
             {
                 success = true,
-                data = _appContext.Produtos.ToListAsync()
+                data = _AppDbContext.Produtos.ToListAsync()
             });
         }
     }

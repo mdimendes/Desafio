@@ -10,11 +10,11 @@ namespace CRUD.Api.Controllers
     [ApiController]
     public class PedidoItemController: ControllerBase
    {
-        private readonly AppContext _appContext;
+        private readonly AppDbContext _AppDbContext;
 
-        public PedidoItemController(AppContext appContext)
+        public PedidoItemController(AppDbContext AppDbContext)
         {
-            _appContext = appContext;
+            _AppDbContext = AppDbContext;
         }
 
         [HttpGet]
@@ -24,7 +24,7 @@ namespace CRUD.Api.Controllers
             return Ok(new
             {
                 success = true,
-            //    data = _appContext.PedidoItens.ToListAsync()
+            //    data = _AppDbContext.PedidoItens.ToListAsync()
             });
         }
 
@@ -32,8 +32,8 @@ namespace CRUD.Api.Controllers
         [Route("[action]")]
         public async Task<IActionResult> InserePedidoItem(PedidoItem pedidoItem)
         {
-            //_appContext.PedidoItens.Add(pedidoItem);
-            await _appContext.SaveChangesAsync();
+            //_AppDbContext.PedidoItens.Add(pedidoItem);
+            await _AppDbContext.SaveChangesAsync();
 
             return Ok(new
             {
@@ -46,8 +46,8 @@ namespace CRUD.Api.Controllers
         [Route("[action]")]
         public async Task<IActionResult> AtualizaPedidoItem(PedidoItem pedidoItemNew)
         {
-            // var pedidoItemOld = _appContext.PedidoItens.Find(pedidoItemNew.Id);
-           // _appContext.PedidoItens.Update(pedidoItemNew);
+            // var pedidoItemOld = _AppDbContext.PedidoItens.Find(pedidoItemNew.Id);
+           // _AppDbContext.PedidoItens.Update(pedidoItemNew);
 
             return Ok(new
             {
@@ -60,13 +60,13 @@ namespace CRUD.Api.Controllers
         [Route("[action]")]
         public async Task<IActionResult> RemovePedidoItem(PedidoItem pedidoItem)
         {
-            //_appContext.Entry(_appContext.PedidoItens.Find(PedidoItem)).State = EntityState.Deleted;
-            await _appContext.SaveChangesAsync();
+            //_AppDbContext.Entry(_AppDbContext.PedidoItens.Find(PedidoItem)).State = EntityState.Deleted;
+            await _AppDbContext.SaveChangesAsync();
 
             return Ok(new
             {
                 success = true,
-                //data = _appContext.PedidoItens.ToListAsync()
+                //data = _AppDbContext.PedidoItens.ToListAsync()
             });
         }
 
