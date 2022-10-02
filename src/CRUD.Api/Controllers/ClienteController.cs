@@ -42,17 +42,28 @@ namespace CRUD.Api.Controllers
             });
         }
 
-        [HttpPut]
+        [HttpPatch]
         [Route("[action]")]
         public async Task<IActionResult> AtualizaCliente(Cliente clienteNew)
         {
              var clienteOld = _AppDbContext.Clientes.Find(clienteNew.Id);
-            _AppDbContext.Clientes.Update(clienteNew);
+
+             if (clienteOld != null)
+             {
+                clienteOld.Nome = string.IsNullOrEmpty(clienteNew.Nome) ? clienteOld.Nome : clienteNew.Nome;
+                clienteOld.Telefone = string.IsNullOrEmpty(clienteNew.Telefone) ? clienteOld.Telefone : clienteNew.Telefone ;                
+                clienteOld.Cidade = string.IsNullOrEmpty(clienteNew.Cidade) ? clienteOld.Cidade : clienteNew.Cidade ;
+                clienteOld.Estado = string.IsNullOrEmpty(clienteNew.Estado) ? clienteOld.Estado : clienteNew.Estado ;
+                clienteOld.CEP = string.IsNullOrEmpty(clienteNew.CEP) ? clienteOld.CEP : clienteNew.CEP ;                
+             }
+
+            _AppDbContext.Clientes.Update(clienteOld);
+            await _AppDbContext.SaveChangesAsync();            
 
             return Ok(new
             {
                 success = true,
-                data = clienteNew
+                data = clienteOld
             });
         }
 
@@ -60,7 +71,7 @@ namespace CRUD.Api.Controllers
         [Route("[action]")]
         public async Task<IActionResult> RemoveCliente(Cliente cliente)
         {
-            _AppDbContext.Entry(_AppDbContext.Clientes.Find(cliente)).State = EntityState.Deleted;
+            _AppDbContext.Entry(_AppDbContext.Clientes.Find(cliente.Id)).State = EntityState.Deleted;
             await _AppDbContext.SaveChangesAsync();
 
             return Ok(new
