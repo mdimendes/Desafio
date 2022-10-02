@@ -8,13 +8,13 @@ BEGIN
 END;
 
 GO
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220929202505_Migracao')
+IF NOT EXISTS(SELECT * FROM [MigrationsHistoryTable] WHERE [MigrationId] = N'20220929202505_Migracao')
 BEGIN
     CREATE TABLE [Clientes] (
         [Id] int NOT NULL IDENTITY,
         [Nome] VARCHAR(80) NOT NULL,
         [Telefone] CHAR(11) NULL,
-        [CEP] CHAR(2) NOT NULL,
+        [CEP] CHAR(8) NOT NULL,
         [Estado] CHAR(2) NOT NULL,
         [Cidade] nvarchar(60) NOT NULL,
         CONSTRAINT [PK_Clientes] PRIMARY KEY ([Id])
@@ -23,7 +23,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220929202505_Migracao')
+IF NOT EXISTS(SELECT * FROM [MigrationsHistoryTable] WHERE [MigrationId] = N'20220929202505_Migracao')
 BEGIN
     CREATE TABLE [Produtos] (
         [Id] int NOT NULL IDENTITY,
@@ -38,7 +38,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220929202505_Migracao')
+IF NOT EXISTS(SELECT * FROM [MigrationsHistoryTable] WHERE [MigrationId] = N'20220929202505_Migracao')
 BEGIN
     CREATE TABLE [Pedidos] (
         [Id] int NOT NULL IDENTITY,
@@ -55,7 +55,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220929202505_Migracao')
+IF NOT EXISTS(SELECT * FROM [MigrationsHistoryTable] WHERE [MigrationId] = N'20220929202505_Migracao')
 BEGIN
     CREATE TABLE [PedidoItens] (
         [Id] int NOT NULL IDENTITY,
@@ -72,37 +72,37 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220929202505_Migracao')
+IF NOT EXISTS(SELECT * FROM [MigrationsHistoryTable] WHERE [MigrationId] = N'20220929202505_Migracao')
 BEGIN
     CREATE INDEX [idx_cliente_telefone] ON [Clientes] ([Telefone]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220929202505_Migracao')
+IF NOT EXISTS(SELECT * FROM [MigrationsHistoryTable] WHERE [MigrationId] = N'20220929202505_Migracao')
 BEGIN
     CREATE INDEX [IX_PedidoItens_PedidoId] ON [PedidoItens] ([PedidoId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220929202505_Migracao')
+IF NOT EXISTS(SELECT * FROM [MigrationsHistoryTable] WHERE [MigrationId] = N'20220929202505_Migracao')
 BEGIN
     CREATE INDEX [IX_PedidoItens_ProdutoId] ON [PedidoItens] ([ProdutoId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220929202505_Migracao')
+IF NOT EXISTS(SELECT * FROM [MigrationsHistoryTable] WHERE [MigrationId] = N'20220929202505_Migracao')
 BEGIN
     CREATE INDEX [IX_Pedidos_ClienteId] ON [Pedidos] ([ClienteId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220929202505_Migracao')
+IF NOT EXISTS(SELECT * FROM [MigrationsHistoryTable] WHERE [MigrationId] = N'20220929202505_Migracao')
 BEGIN
-    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    INSERT INTO [MigrationsHistoryTable] ([MigrationId], [ProductVersion])
     VALUES (N'20220929202505_Migracao', N'3.1.5');
 END;
 

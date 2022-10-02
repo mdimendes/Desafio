@@ -15,10 +15,10 @@ namespace CRUD.Api.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "VARCHAR(80)", nullable: false),
                     Telefone = table.Column<string>(type: "CHAR(11)", nullable: true),
-                    CEP = table.Column<string>(type: "CHAR(2)", nullable: false),
+                    CEP = table.Column<string>(type: "CHAR(8)", nullable: false),
                     Estado = table.Column<string>(type: "CHAR(2)", nullable: false),
                     Cidade = table.Column<string>(maxLength: 60, nullable: false),
-                    Email = table.Column<string>(nullable: true)
+                    //Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

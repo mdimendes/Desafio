@@ -30,15 +30,15 @@ namespace CRUD.Api.Migrations
 
                     b.Property<string>("CEP")
                         .IsRequired()
-                        .HasColumnType("CHAR(2)");
+                        .HasColumnType("CHAR(8)");
 
                     b.Property<string>("Cidade")
                         .IsRequired()
                         .HasColumnType("nvarchar(60)")
                         .HasMaxLength(60);
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                    // b.Property<string>("Email")
+                    //     .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Estado")
                         .IsRequired()
