@@ -11,8 +11,8 @@ namespace CRUD.Domain.Entities
         public Cliente Cliente { get; set; }
         public DateTime Iniciadoem { get; set; }
         public DateTime Finalizadoem { get; set; }
-        public TipoFrete TipoFrete { get; set; }
-        public StatusPedido Status { get; set; }
+        public TipoFrete? TipoFrete { get; set; }
+        public StatusPedido? Status { get; set; }
         public string Observacao { get; set; }
         public ICollection<PedidoItem> Itens { get; set; }
     }

@@ -42,17 +42,29 @@ namespace CRUD.Api.Controllers
             });
         }
 
-        [HttpPut]
+        [HttpPatch]
         [Route("[action]")]
         public async Task<IActionResult> AtualizaPedido(Pedido pedidoNew)
         {
-             var pedidoOld = _AppDbContext.Clientes.Find(pedidoNew.Id);
-            _AppDbContext.Pedidos.Update(pedidoNew);
+            var pedidoOld = _AppDbContext.Pedidos.Find(pedidoNew.Id);
+
+            if (pedidoOld == null)
+            {
+                return new NoContentResult();
+            }
+
+            pedidoOld.Observacao = string.IsNullOrEmpty(pedidoNew.Observacao) ? pedidoOld.Observacao : pedidoNew.Observacao;
+            pedidoOld.TipoFrete = (pedidoNew.TipoFrete == null) ? pedidoOld.TipoFrete : pedidoNew.TipoFrete;
+            pedidoOld.Status = (pedidoNew.Status == null) ? pedidoOld.Status : pedidoNew.Status;
+            pedidoOld.Itens = (pedidoNew.Itens == null) ? pedidoOld.Itens : pedidoNew.Itens;
+
+            _AppDbContext.Pedidos.Update(pedidoOld);
+            await _AppDbContext.SaveChangesAsync();
 
             return Ok(new
             {
                 success = true,
-                data = pedidoNew
+                data = pedidoOld
             });
         }
 
@@ -60,7 +72,7 @@ namespace CRUD.Api.Controllers
         [Route("[action]")]
         public async Task<IActionResult> RemovePedido(Pedido pedido)
         {
-            _AppDbContext.Entry(_AppDbContext.Pedidos.Find(pedido)).State = EntityState.Deleted;
+            _AppDbContext.Entry(_AppDbContext.Pedidos.Find(pedido.Id)).State = EntityState.Deleted;
             await _AppDbContext.SaveChangesAsync();
 
             return Ok(new

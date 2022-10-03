@@ -46,19 +46,21 @@ namespace CRUD.Api.Controllers
         [Route("[action]")]
         public async Task<IActionResult> AtualizaCliente(Cliente clienteNew)
         {
-             var clienteOld = _AppDbContext.Clientes.Find(clienteNew.Id);
+            var clienteOld = _AppDbContext.Clientes.Find(clienteNew.Id);
 
-             if (clienteOld != null)
-             {
-                clienteOld.Nome = string.IsNullOrEmpty(clienteNew.Nome) ? clienteOld.Nome : clienteNew.Nome;
-                clienteOld.Telefone = string.IsNullOrEmpty(clienteNew.Telefone) ? clienteOld.Telefone : clienteNew.Telefone ;                
-                clienteOld.Cidade = string.IsNullOrEmpty(clienteNew.Cidade) ? clienteOld.Cidade : clienteNew.Cidade ;
-                clienteOld.Estado = string.IsNullOrEmpty(clienteNew.Estado) ? clienteOld.Estado : clienteNew.Estado ;
-                clienteOld.CEP = string.IsNullOrEmpty(clienteNew.CEP) ? clienteOld.CEP : clienteNew.CEP ;                
-             }
+            if (clienteOld == null)
+            {
+                return new NoContentResult();
+            }
+
+            clienteOld.Nome = string.IsNullOrEmpty(clienteNew.Nome) ? clienteOld.Nome : clienteNew.Nome;
+            clienteOld.Telefone = string.IsNullOrEmpty(clienteNew.Telefone) ? clienteOld.Telefone : clienteNew.Telefone;
+            clienteOld.Cidade = string.IsNullOrEmpty(clienteNew.Cidade) ? clienteOld.Cidade : clienteNew.Cidade;
+            clienteOld.Estado = string.IsNullOrEmpty(clienteNew.Estado) ? clienteOld.Estado : clienteNew.Estado;
+            clienteOld.CEP = string.IsNullOrEmpty(clienteNew.CEP) ? clienteOld.CEP : clienteNew.CEP;
 
             _AppDbContext.Clientes.Update(clienteOld);
-            await _AppDbContext.SaveChangesAsync();            
+            await _AppDbContext.SaveChangesAsync();
 
             return Ok(new
             {
