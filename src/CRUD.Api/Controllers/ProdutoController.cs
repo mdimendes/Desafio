@@ -31,7 +31,7 @@ namespace CRUD.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [Route("{id},{codigoBarras}")]          
+        [Route("{id},{codigoBarras}")]
         public async Task<IActionResult> GetProduto([FromRoute] int id, [FromRoute] string codigoBarras)
         {
 
@@ -57,7 +57,16 @@ namespace CRUD.Api.Controllers
             });
         }
 
+        /// <summary>
+        /// List Products.
+        /// </summary>        
+        /// <returns>The List of Products</returns>
+        /// <response code="200">Returns the List of Product</response>
+        /// <response code="204">If the Products were not found</response>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Route("[action]")]
         public async Task<IActionResult> GetAllProdutos()
         {
@@ -68,7 +77,16 @@ namespace CRUD.Api.Controllers
             });
         }
 
+        /// <summary>
+        /// Creates a Product record.
+        /// </summary>
+        /// <param name="produto"></param>        
+        /// <returns>The Product record created</returns>
+        /// <response code="201">Returns the Product created</response>
+        /// <response code="400">If Product could not be created</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Route("[action]")]
         public async Task<IActionResult> InsereProduto(Produto produto)
         {
@@ -83,7 +101,16 @@ namespace CRUD.Api.Controllers
             });
         }
 
+        /// <summary>
+        /// Updates a specific Product.
+        /// </summary>
+        /// <param name="produtoNew"></param>        
+        /// <returns>The updated Product</returns>
+        /// <response code="200">Returns the updated Product</response>
+        /// <response code="204">If the Product was not found</response>
         [HttpPatch]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Route("[action]")]
         public async Task<IActionResult> AtualizaProduto(Produto produtoNew)
         {
@@ -91,7 +118,7 @@ namespace CRUD.Api.Controllers
 
             if (produtoOld == null)
             {
-                return new NoContentResult();
+                return new NotFoundResult();
             }
 
             produtoOld.Descricao = string.IsNullOrEmpty(produtoNew.Descricao) ? produtoOld.Descricao : produtoNew.Descricao;
@@ -110,7 +137,16 @@ namespace CRUD.Api.Controllers
             });
         }
 
+        /// <summary>
+        /// Deletes a Product.
+        /// </summary>
+        /// <param name="Id"></param>        
+        /// <returns>List of products</returns>
+        /// <response code="200">Returns list of Products</response>
+        /// <response code="404">If the Product was not found</response>
         [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Route("{Id}")]
         public async Task<IActionResult> RemoveProduto(int Id)
         {
